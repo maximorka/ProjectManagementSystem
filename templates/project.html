@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Project</title>
+</head>
+<body>
+<style>
+    .project{
+        padding: 10 px;
+        margin: 5px;
+        background-color: lightgrey;
+    }
+    .project-button{
+        padding: 15 px;
+        margin: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0.25rem;
+        border: none;
+    }
+    .h1-project{
+    text-align:center;
+    }
+</style>
+
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/main" class="nav-link " aria-current="page">Main</a></li>
+            <li class="nav-item"><a href="/company" class="nav-link">Company</a></li>
+            <li class="nav-item"><a href="/customer" class="nav-link">Customer</a></li>
+            <li class="nav-item"><a href="/project" class="nav-link active">Project</a></li>
+            <li class="nav-item"><a href="/developer" class="nav-link">Developer</a></li>
+            <li class="nav-item"><a href="/skills" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="/developer_project" class="nav-link">Developer-project</a></li>
+            <li class="nav-item"><a href="/developer_skills" class="nav-link">Developer-skills</a></li>
+            <li class="nav-item"><a href="/info" class="nav-link ">Info</a></li>
+        </ul>
+    </header>
+</div>
+
+
+<form>
+    <h1 class="display-5 fw-bold" th:text = " 'Current size project: '+ ${projects.size()}"></h1>
+
+    <div class="project" th:each ="project:${projects}">
+        <div th:text ="'Project: '+${project.name}"></div>
+        <br>
+        <div th:text ="'Description: '+${project.description}"></div>
+        <br>
+        <div th:text ="'Project id: '+${project.id}"></div>
+        <div>
+            <form  action ="/project/delete" method = "POST">
+                <input type="hidden" th:value="${project.id}" name ="id">
+                <button class="project-button" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</form>
+
+<div class="border-bottom" ></div>
+
+<h1 class="display-5 fw-bold h1-project " >Create new project</h1>
+<form class="project"  action="/project" method="post">
+    <div>
+        <label for = "name">Name:</label>
+        <input type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <input type="description" name="description" id="description">
+    </div>
+    <div>
+        <label for="companyId">CompanyId:</label>
+        <input type="companyId" name="companyId" id="companyId">
+    </div>
+
+    <div>
+        <label for="customerId">CustomerId:</label>
+        <input type="customerId" name="customerId" id="customerId">
+    </div>
+
+    <div>
+        <label for="cost">Cost:</label>
+        <input type="cost" name="cost" id="cost">
+    </div>
+
+    <div>
+        <button class="project-button" type="submit"> Post project</button>
+    </div>
+</form>
+
+<div class="border-bottom" ></div>
+
+<h1 class="display-5 fw-bold h1-project ">Update project</h1>
+
+<form class="project"  action="/project/update" method="POST">
+    <div>
+        <label for = "name">Name:</label>
+        <input type="text" name="name" id="nameProject">
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="descriptionUpdateProject">
+    </div>
+    <div>
+        <label for="companyIdUpdateProject">CompanyId:</label>
+        <input type="text" name="companyId" id="companyIdUpdateProject">
+    </div>
+    <div>
+        <label for="customerIdUpdateProject">CustomerId:</label>
+        <input type="text" name="customerId" id="customerIdUpdateProject">
+    </div>
+    <div>
+        <label for="costUpdateProject">Cost:</label>
+        <input type="text" name="cost" id="costUpdateProject">
+    </div>
+    <div>
+        <label for="IdUpdateProject">Id:</label>
+        <input type="text" name="id" id="IdUpdateProject">
+    </div>
+    <div>
+        <button class="project-button" type="submit"> Update</button>
+    </div>
+
+
+</form>
+
+
+</body>
+</html>

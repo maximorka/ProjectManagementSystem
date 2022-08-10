@@ -17,7 +17,7 @@ age INTEGER NOT NULL ,
 sex VARCHAR(10) NOT NULL,
 company_id BIGINT,
 salary INTEGER,
-FOREIGN KEY (company_id) REFERENCES company(id),
+FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
 CONSTRAINT sex_enum CHECK (sex IN ('male','famale','unknown')),
 CONSTRAINT age_period CHECK (age BETWEEN 1 AND 130)
 );
@@ -30,8 +30,8 @@ company_id BIGINT,
 customer_id BIGINT,
 cost INTEGER,
 date Date,
-FOREIGN KEY (company_id) REFERENCES company(id),
-FOREIGN KEY (customer_id) REFERENCES customer(id)
+FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE
 );
 
 

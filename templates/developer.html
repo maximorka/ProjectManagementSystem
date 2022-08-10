@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Developer</title>
+</head>
+<body>
+
+<style>
+    .developer{
+        padding: 10 px;
+        margin: 5px;
+        background-color: lightgrey;
+    }
+    .developer-button{
+        padding: 15 px;
+        margin: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0.25rem;
+        border: none;
+    }
+    .h1-developer{
+    text-align:center;
+    }
+</style>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/main" class="nav-link " aria-current="page">Main</a></li>
+            <li class="nav-item"><a href="/company" class="nav-link">Company</a></li>
+            <li class="nav-item"><a href="/customer" class="nav-link">Customer</a></li>
+            <li class="nav-item"><a href="/project" class="nav-link">Project</a></li>
+            <li class="nav-item"><a href="/developer" class="nav-link active">Developer</a></li>
+            <li class="nav-item"><a href="/skills" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="/developer_project" class="nav-link">Developer-project</a></li>
+            <li class="nav-item"><a href="/developer_skills" class="nav-link">Developer-skills</a></li>
+            <li class="nav-item"><a href="/info" class="nav-link ">Info</a></li>
+        </ul>
+    </header>
+</div>
+<form>
+    <h1 class="display-5 fw-bold" th:text = " 'Current size developer: '+ ${developers.size()}"></h1>
+
+    <div class="developer" th:each ="developer:${developers}">
+        <div th:text ="'Name developer: '+${developer.name}"></div>
+        <br>
+        <div th:text ="'Surname: '+${developer.surname}"></div>
+        <br>
+        <div th:text ="'Age: '+${developer.age}"></div>
+        <br>
+        <div th:text ="'Sex: '+${developer.sex}"></div>
+        <br>
+        <div th:text ="'Salary: '+${developer.salary}"></div>
+        <br>
+        <div th:text ="'Id: '+${developer.id}"></div>
+
+        <div>
+            <form  action ="/developer/delete" method = "POST">
+                <input type="hidden" th:value="${developer.id}" name ="id">
+                <button class="developer-button" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</form>
+<div class="border-bottom" ></div>
+<h1 class="display-5 fw-bold h1-developer " >Create new developer</h1>
+<form class="developer"  action="/developer" method="post">
+    <div>
+        <label for = "name">Name:</label>
+        <input type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" name="surname" id="surname">
+    </div>
+
+    <div>
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age">
+    </div>
+
+    <div>
+        <label for="sex">Sex(male, famale):</label>
+        <input type="text" name="sex" id="sex">
+    </div>
+
+    <div>
+        <label for="salary">Salary:</label>
+        <input type="text" name="salary" id="salary">
+    </div>
+
+    <div>
+        <label for="companyId">companyId:</label>
+        <input type="text" name="companyId" id="companyId">
+    </div>
+
+
+    <div>
+        <button class="developer-button" type="submit"> Post developer</button>
+    </div>
+
+
+</form>
+
+<div class="border-bottom" ></div>
+<h1 class="display-5 fw-bold h1-developer " >Update developer</h1>
+
+<form class="developer"  action="/developer/update" method="POST">
+    <div>
+        <label for="idUpdate">Id:</label>
+        <input type="text" name="id" id="idUpdate">
+    </div>
+    <div>
+        <label for = "nameUpdate">Name:</label>
+        <input type="text" name="name" id="nameUpdate">
+    </div>
+
+    <div>
+        <label for="surnameUpdate">Surname:</label>
+        <input type="text" name="surname" id="surnameUpdate">
+    </div>
+
+    <div>
+        <label for="ageUpdate">Age:</label>
+        <input type="text" name="age" id="ageUpdate">
+    </div>
+
+    <div>
+        <label for="sexUpdate">Sex(male, famale):</label>
+        <input type="text" name="sex" id="sexUpdate">
+    </div>
+
+    <div>
+        <label for="salaryUpdate">Salary:</label>
+        <input type="text" name="salary" id="salaryUpdate">
+    </div>
+
+    <div>
+        <label for="company_idUpdate">companyId:</label>
+        <input type="text" name="companyId" id="company_idUpdate">
+    </div>
+    <div>
+        <button class="developer-button" type="submit"> Update</button>
+    </div>
+
+
+</form>
+
+
+</body>
+</html>

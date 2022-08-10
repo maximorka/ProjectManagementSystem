@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Developer-project</title>
+</head>
+<body>
+<style>
+    .developer_project{
+        padding: 10 px;
+        margin: 5px;
+        background-color: lightgrey;
+    }
+    .developer_project-button{
+        padding: 15 px;
+        margin: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0.25rem;
+        border: none;
+    }
+    .h1-developer_project{
+    text-align:center;
+    }
+</style>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/main" class="nav-link " aria-current="page">Main</a></li>
+            <li class="nav-item"><a href="/company" class="nav-link ">Company</a></li>
+            <li class="nav-item"><a href="/customer" class="nav-link">Customer</a></li>
+            <li class="nav-item"><a href="/project" class="nav-link">Project</a></li>
+            <li class="nav-item"><a href="/developer" class="nav-link">Developer</a></li>
+            <li class="nav-item"><a href="/skills" class="nav-link ">Skills</a></li>
+            <li class="nav-item"><a href="/developer_project" class="nav-link active">Developer-project</a></li>
+            <li class="nav-item"><a href="/developer_skills" class="nav-link">Developer-skills</a></li>
+            <li class="nav-item"><a href="/info" class="nav-link ">Info</a></li>
+        </ul>
+    </header>
+</div>
+<form>
+    <h1 class="display-5 fw-bold" th:text = " 'Current developer_project communication: '+ ${developer_projects.size()}"></h1>
+
+    <div class="developer_project" th:each ="developer_project:${developer_projects}">
+            <div th:text ="'develop_id: '+${developer_project.develop_id}"></div>
+        <br>
+            <div th:text ="'project_id: '+${developer_project.project_id}"></div>
+        <br>
+        <div>
+            <form  action ="/developer_project/delete" method = "POST">
+                <input type="hidden" th:value="${developer_project.develop_id}" name ="develop_id">
+                <input type="hidden" th:value="${developer_project.project_id}" name ="project_id">
+                <button class="developer_project-button" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</form>
+<div class="border-bottom" ></div>
+<h1 class="display-5 fw-bold h1-developer_project " >Create new developer_project</h1>
+<form class="developer_project"  action="/developer_project" method="post">
+    <div>
+        <label for = "develop_id">Develop_id:</label>
+        <input type="text" name="develop_id" id="develop_id">
+    </div>
+
+    <div>
+        <label for="project_id">project_id:</label>
+        <input type="text" name="project_id" id="project_id">
+    </div>
+
+    <div>
+        <button class="developer_project-button" type="submit"> Post developer_project</button>
+    </div>
+
+
+</form>
+
+
+</body>
+</html>
