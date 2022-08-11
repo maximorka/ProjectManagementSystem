@@ -1,6 +1,7 @@
 package com.model;
 
 import com.model.feature.dataBaseService.customer.dao.CustomerDao;
+
 import lombok.Getter;
 import com.model.feature.dataBaseService.company.dao.CompanyDao;
 import com.model.feature.dataBaseService.developer.dao.DeveloperDao;
@@ -8,14 +9,17 @@ import com.model.feature.dataBaseService.developerSkills.dao.DeveloperSkillsDao;
 import com.model.feature.dataBaseService.developer_project.dao.DeveloperProjectDao;
 import com.model.feature.dataBaseService.project.dao.ProjectDao;
 import com.model.feature.dataBaseService.skills.dao.SkillsDao;
-import com.model.feature.prefs.Prefs;
+
 import com.model.feature.storage.DataBaseInit;
 import com.model.feature.storage.Storage;
 
 
 import java.sql.Connection;
 
+
+
 public class Model {
+    public static String DATABASE_CONNECTION_URL = "jdbc:h2:./testDB1";
    Storage storage;
     @Getter
     public ProjectDao projectDao;
@@ -42,9 +46,7 @@ public class Model {
 
     public void settings()  {
         try {
-            String connectionUrl = new Prefs().getString(Prefs.DATABASE_CONNECTION_URL);
-
-            new DataBaseInit().initDB(connectionUrl);
+            new DataBaseInit().initDB(DATABASE_CONNECTION_URL);
             storage = Storage.getINSTANCE();
             Connection connection = storage.getConnection();
             projectDao = new ProjectDao(connection);

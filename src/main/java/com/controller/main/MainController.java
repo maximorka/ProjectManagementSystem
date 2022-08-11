@@ -19,13 +19,13 @@ public class MainController extends HttpServlet {
 
 
     @Override
-    public void init()  {
-Model.getINSTANCE().getCompanyDao();
+    public void init() {
+        Model.getINSTANCE().getCompanyDao();
 
         engine = new TemplateEngine();
 
         FileTemplateResolver templateResolver = new FileTemplateResolver();
-        templateResolver.setPrefix("F:\\JAVA\\JDBC\\templates/");
+        templateResolver.setPrefix("templates/");
 
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
