@@ -5,6 +5,7 @@ import com.model.command.CommandService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +22,19 @@ public class MainController extends HttpServlet {
     @Override
     public void init() {
         Model.getINSTANCE().getCompanyDao();
+        commandService = new CommandService();
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        ServletContext context = req.getServletContext();
+        String path = context.getRealPath("templates/");
 
         engine = new TemplateEngine();
 
         FileTemplateResolver templateResolver = new FileTemplateResolver();
-        templateResolver.setPrefix("templates/");
+
+        templateResolver.setPrefix(path);
 
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
@@ -34,11 +43,7 @@ public class MainController extends HttpServlet {
         templateResolver.setCacheable(false);
         engine.addTemplateResolver(templateResolver);
 
-        commandService = new CommandService();
-    }
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         commandService.process(req, resp, engine);
     }
 

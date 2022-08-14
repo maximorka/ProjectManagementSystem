@@ -12,12 +12,7 @@ import com.model.command.developer.AddDeveloperCommand;
 import com.model.command.developer.DeleteDeveloperCommand;
 import com.model.command.developer.GetAllDeveloper;
 import com.model.command.developer.UpdateDeveloperCommand;
-import com.model.command.developerProject.AddDeveloperProjectCommand;
-import com.model.command.developerProject.DeleteDeveloperProjectCommand;
-import com.model.command.developerProject.GetAllDeveloperProject;
-import com.model.command.developerSkills.AddDeveloperSkillsCommand;
-import com.model.command.developerSkills.DeleteDeveloperSkillsCommand;
-import com.model.command.developerSkills.GetAllDeveloperSkills;
+
 import com.model.command.project.AddProjectCommand;
 import com.model.command.project.DeleteProjectCommand;
 import com.model.command.project.GetAllProject;
@@ -39,6 +34,7 @@ public class CommandService {
 
     public CommandService() {
         commands = new HashMap<>();
+        commands.put("GET /", new GetMainCommand());
         commands.put("GET /main", new GetMainCommand());
         commands.put("GET /info", new GetInfo());
 
@@ -66,14 +62,6 @@ public class CommandService {
         commands.put("POST /skills", new AddSkillsCommand());
         commands.put("POST /skills/delete", new DeleteSkillsCommand());
         commands.put("POST /skills/update", new UpdateSkillsCommand());
-
-        commands.put("GET /developer_project", new GetAllDeveloperProject());
-        commands.put("POST /developer_project", new AddDeveloperProjectCommand());
-        commands.put("POST /developer_project/delete", new DeleteDeveloperProjectCommand());
-
-        commands.put("GET /developer_skills", new GetAllDeveloperSkills());
-        commands.put("POST /developer_skills", new AddDeveloperSkillsCommand());
-        commands.put("POST /developer_skills/delete", new DeleteDeveloperSkillsCommand());
 
     }
 

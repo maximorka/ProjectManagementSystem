@@ -28,6 +28,9 @@ public class GetAllDeveloper implements Command {
 
         try {
             developer.put("developers", Model.getINSTANCE().getDeveloperDao().getAllDevelopers());
+            developer.put("companies", Model.getINSTANCE().getCompanyDao().getAllCompany());
+            developer.put("skills", Model.getINSTANCE().getSkillsDao().getAllSkills());
+            developer.put("projects", Model.getINSTANCE().getProjectDao().getAllProject());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

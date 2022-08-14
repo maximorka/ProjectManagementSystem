@@ -36,8 +36,7 @@
             <li class="nav-item"><a href="/project" class="nav-link">Project</a></li>
             <li class="nav-item"><a href="/developer" class="nav-link active">Developer</a></li>
             <li class="nav-item"><a href="/skills" class="nav-link">Skills</a></li>
-            <li class="nav-item"><a href="/developer_project" class="nav-link">Developer-project</a></li>
-            <li class="nav-item"><a href="/developer_skills" class="nav-link">Developer-skills</a></li>
+
             <li class="nav-item"><a href="/info" class="nav-link ">Info</a></li>
         </ul>
     </header>
@@ -95,10 +94,37 @@
     </div>
 
     <div>
-        <label for="companyId">companyId:</label>
+        <label for="companyId">CompanyId:</label>
         <input type="text" name="companyId" id="companyId">
+        <br>
+        <label >Company is present:</label>
+        <div class="companies" th:each ="company:${companies}">
+            <div th:text ="'Name: '+${company.name}+', id:'+${company.id}"></div>
+        </div>
     </div>
+    <br>
+    <br>
+    <div>
+        <label for="projectId">Project id:</label>
+        <input type="text" name="projectId" id="projectId">
+        <br>
+        <label >Project is present:</label>
+        <div class="projects" th:each ="project:${projects}">
+            <div th:text ="'Name: '+${project.name}+', id:'+${project.id}"></div>
+        </div>
+    </div>
+    <br>
+    <br>
 
+    <div>
+        <label for="skillsId">SkillsId:</label>
+        <input type="text" name="skillsId" id="skillsId">
+        <br>
+        <label >Skills is present:</label>
+        <div class="skills" th:each ="skill:${skills}">
+            <div th:text ="'Kategory: '+${skill.kategory}+', id:'+${skill.id}"></div>
+        </div>
+    </div>
 
     <div>
         <button class="developer-button" type="submit"> Post developer</button>
@@ -141,9 +167,35 @@
     </div>
 
     <div>
-        <label for="company_idUpdate">companyId:</label>
+        <label for="company_idUpdate">CompanyId:</label>
         <input type="text" name="companyId" id="company_idUpdate">
+        <br>
+        <label >Company is present:</label>
+        <div class="companies" th:each ="company:${companies}">
+            <div th:text ="'Name: '+${company.name}+', id:'+${company.id}"></div>
+        </div>
     </div>
+    <br>
+    <div>
+        <label for="projectIdUpdate">Project id:</label>
+        <input type="text" name="projectId" id="projectIdUpdate">
+        <br>
+        <label >Project is present:</label>
+        <div class="projects" th:each ="project:${projects}">
+            <div th:text ="'Name: '+${project.name}+', id:'+${project.id}"></div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <label for="skillsIdUpdate">SkillsId:</label>
+        <input type="text" name="skillsId" id="skillsIdUpdate">
+        <br>
+        <label >Skills is present:</label>
+        <div class="skills" th:each ="skill:${skills}">
+            <div th:text ="'Kategory: '+${skill.kategory}+', id:'+${skill.id}"></div>
+        </div>
+    </div>
+
     <div>
         <button class="developer-button" type="submit"> Update</button>
     </div>
