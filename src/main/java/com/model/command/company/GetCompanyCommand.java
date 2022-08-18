@@ -27,11 +27,9 @@ public class GetCompanyCommand implements Command {
         resp.setContentType("text/html");
 
         Map<String, Object> objectObjectMap = new HashMap<>();
-        try {
+
             objectObjectMap.put("companies", Model.getINSTANCE().getCompanyDao().getAllCompany());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
 
         Context context = new Context(
                 req.getLocale(),

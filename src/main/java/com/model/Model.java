@@ -1,36 +1,25 @@
 package com.model;
 
-import com.model.feature.dataBaseService.customer.dao.CustomerDao;
+import com.model.hibernate.dataBaseService.customer.dao.CustomerDao;
+import com.model.hibernate.dataBaseService.company.dao.CompanyDao;
+import com.model.hibernate.dataBaseService.developer.dao.DeveloperDao;
+import com.model.hibernate.dataBaseService.project.dao.ProjectDao;
+import com.model.hibernate.dataBaseService.skills.dao.SkillsDao;
+import com.model.feature.storage.DataBaseInit;
 
 import lombok.Getter;
-import com.model.feature.dataBaseService.company.dao.CompanyDao;
-import com.model.feature.dataBaseService.developer.dao.DeveloperDao;
-import com.model.feature.dataBaseService.developerSkills.dao.DeveloperSkillsDao;
-import com.model.feature.dataBaseService.developer_project.dao.DeveloperProjectDao;
-import com.model.feature.dataBaseService.project.dao.ProjectDao;
-import com.model.feature.dataBaseService.skills.dao.SkillsDao;
 
-import com.model.feature.storage.DataBaseInit;
-import com.model.feature.storage.Storage;
-
-
-import java.sql.Connection;
-
-
+import static com.model.feature.storage.StorageConstants.CONNECTION_URL;
 
 public class Model {
-    public static String DATABASE_CONNECTION_URL = "jdbc:h2:./testDB1";
-   Storage storage;
+
     @Getter
     public ProjectDao projectDao;
-    @Getter
-    public DeveloperProjectDao developerProjectDao;
+
     @Getter
     public DeveloperDao developerDao;
     @Getter
     public SkillsDao skillsDao;
-    @Getter
-    public DeveloperSkillsDao developerSkillsDao;
     @Getter
     public  CompanyDao companyDao;
     @Getter
@@ -46,18 +35,18 @@ public class Model {
 
     public void settings()  {
         try {
-            new DataBaseInit().initDB(DATABASE_CONNECTION_URL);
-            storage = Storage.getINSTANCE();
-            Connection connection = storage.getConnection();
-            projectDao = new ProjectDao(connection);
-            developerProjectDao = new DeveloperProjectDao(connection);
-            developerDao = new DeveloperDao(connection);
-            skillsDao = new SkillsDao(connection);
-            developerSkillsDao = new DeveloperSkillsDao(connection);
-            companyDao = new CompanyDao(connection);
-            customerDao = new CustomerDao(connection);
+            new DataBaseInit().initDB(CONNECTION_URL);
+            projectDao = new ProjectDao();
+            skillsDao = new SkillsDao();
+            developerDao = new DeveloperDao();
+            companyDao = new CompanyDao();
+            customerDao = new CustomerDao();
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Model.getINSTANCE().settings();
     }
 }

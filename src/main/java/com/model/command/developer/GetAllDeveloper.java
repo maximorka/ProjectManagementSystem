@@ -8,7 +8,7 @@ import org.thymeleaf.context.Context;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,20 +26,16 @@ public class GetAllDeveloper implements Command {
 
         Map<String, Object> developer = new HashMap<>();
 
-        try {
-            developer.put("developers", Model.getINSTANCE().getDeveloperDao().getAllDevelopers());
-            developer.put("companies", Model.getINSTANCE().getCompanyDao().getAllCompany());
-            developer.put("skills", Model.getINSTANCE().getSkillsDao().getAllSkills());
-            developer.put("projects", Model.getINSTANCE().getProjectDao().getAllProject());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        developer.put("developers", Model.getINSTANCE().getDeveloperDao().getAllDevelopers());
+        developer.put("companies", Model.getINSTANCE().getCompanyDao().getAllCompany());
+        developer.put("skills", Model.getINSTANCE().getSkillsDao().getAllSkills());
+        developer.put("projects", Model.getINSTANCE().getProjectDao().getAllProject());
 
         Context context = new Context(
                 req.getLocale(),
                 developer
         );
-        templateEngine.process("developer", context,resp.getWriter());
+        templateEngine.process("developer", context, resp.getWriter());
         resp.getWriter().close();
     }
 }

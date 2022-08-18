@@ -2,22 +2,24 @@ package com.model.command.developer;
 
 import com.model.Model;
 import com.model.command.Command;
-import com.model.feature.dataBaseService.customer.entity.Customer;
-import com.model.feature.dataBaseService.developer.entity.Developer;
-import com.model.feature.dataBaseService.developer.util.SexEnum;
-import com.model.feature.dataBaseService.developerSkills.entity.DeveloperSkills;
-import com.model.feature.dataBaseService.developer_project.entity.DeveloperProject;
+
+
+import com.model.hibernate.dataBaseService.skills.entity.Skills;
+import com.model.hibernate.dataBaseService.developer.entity.Developer;
+import com.model.hibernate.dataBaseService.developer.util.SexEnum;
+import com.model.hibernate.dataBaseService.project.entity.Project;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AddDeveloperCommand implements Command {
     @Override
     public void procces(HttpServletRequest req, HttpServletResponse resp, TemplateEngine templateEngine) throws IOException {
-       long devId = 0;
+        long devId = 0;
         int salary = 0;
         int companyId = 0;
         int age = 0;
@@ -54,7 +56,8 @@ public class AddDeveloperCommand implements Command {
             projectId = Integer.parseInt(req.getParameter("projectId"));
         } catch (Exception e) {
             e.printStackTrace();
-        } try {
+        }
+        try {
             skillsId = Integer.parseInt(req.getParameter("skillsId"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,34 +69,20 @@ public class AddDeveloperCommand implements Command {
         developer.setAge(age);
         developer.setSex(sexEnum);
         developer.setSalary(salary);
-        developer.setCompany_id(companyId);
+        developer.setCompany(Model.getINSTANCE().companyDao.getById(companyId));
 
-        try {
-            devId =  Model.getINSTANCE().developerDao.createDeveloper(developer);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        Set<Project> projects = new HashSet<Project>();
+        projects.add(Model.getINSTANCE().projectDao.getById(projectId));
+        developer.setProjects(projects);
 
-        DeveloperSkills developerSkills = new DeveloperSkills();
-        developerSkills.setDevId(devId);
-        developerSkills.setSkillsId(skillsId);
-
-        try {
-            Model.getINSTANCE().developerSkillsDao.createDeveloperSkills(developerSkills);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        DeveloperProject developerProject = new DeveloperProject();
-        developerProject.setDevelop_id(devId);
-        developerProject.setProject_id(projectId);
+        Set<Skills> skills = new HashSet<Skills>();
+        skills.add(Model.getINSTANCE().skillsDao.getById(skillsId));
+        developer.setSkills(skills);
 
 
-        try {
-            Model.getINSTANCE().developerProjectDao.createDeveloperProject(developerProject);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        Model.getINSTANCE().developerDao.createDeveloper(developer);
+
+
         resp.sendRedirect("/developer");
     }
 }

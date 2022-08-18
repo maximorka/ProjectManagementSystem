@@ -1,6 +1,5 @@
 package com.controller.main;
 
-import com.model.Model;
 import com.model.command.CommandService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
@@ -21,7 +20,6 @@ public class MainController extends HttpServlet {
 
     @Override
     public void init() {
-        Model.getINSTANCE().getCompanyDao();
         commandService = new CommandService();
     }
 

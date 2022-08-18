@@ -24,21 +24,18 @@ public class GetAllProject implements Command {
         resp.setCharacterEncoding("UTF-8");
 
 
-
         resp.setContentType("text/html");
         Map<String, Object> projects = new HashMap<>();
 
-        try {
-            projects.put("projects", Model.getINSTANCE().getProjectDao().getAllProject());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
+        projects.put("projects", Model.getINSTANCE().getProjectDao().getAllProject());
+
 
         Context context = new Context(
-            req.getLocale(),
+                req.getLocale(),
                 projects
         );
-        templateEngine.process("project", context,resp.getWriter());
+        templateEngine.process("project", context, resp.getWriter());
         resp.getWriter().close();
     }
 }

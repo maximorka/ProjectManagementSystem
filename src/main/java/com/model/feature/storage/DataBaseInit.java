@@ -6,7 +6,9 @@ public class DataBaseInit {
         System.out.println("Init db");
         Flyway flyway = Flyway
                 .configure()
-                .dataSource(connectionUrl,null, null).load();
+                .dataSource(connectionUrl,null, null)
+                .load();
+
         flyway.migrate();
     }
 }

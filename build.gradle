@@ -38,5 +38,7 @@ dependencies {
     implementation 'org.apache.cxf:cxf-rt-rs-client:3.5.3'
     // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
     implementation 'org.hibernate.orm:hibernate-core:6.1.2.Final'
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'mysql:mysql-connector-java:8.0.30'
 
 }

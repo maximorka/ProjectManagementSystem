@@ -2,9 +2,9 @@ package com.model.command.developer;
 
 import com.model.Model;
 import com.model.command.Command;
-import com.model.feature.dataBaseService.company.entity.Company;
-import com.model.feature.dataBaseService.developer.entity.Developer;
-import com.model.feature.dataBaseService.developer.util.SexEnum;
+
+import com.model.hibernate.dataBaseService.developer.entity.Developer;
+import com.model.hibernate.dataBaseService.developer.util.SexEnum;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ public class UpdateDeveloperCommand implements Command {
     @Override
     public void procces(HttpServletRequest req, HttpServletResponse resp, TemplateEngine templateEngine) throws IOException {
         int salary = 0;
-        int company_id = 0;
+        int companyId = 0;
         int age = 0;
         int id = 0;
 
@@ -44,7 +44,7 @@ public class UpdateDeveloperCommand implements Command {
         }
 
         try {
-            company_id = Integer.parseInt(req.getParameter("companyId"));
+            companyId = Integer.parseInt(req.getParameter("companyId"));
         } catch (Exception e) {
             redirect(resp);
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class UpdateDeveloperCommand implements Command {
         developer.setAge(age);
         developer.setSex(sexEnum);
         developer.setSalary(salary);
-        developer.setCompany_id(company_id);
+       developer.setCompany(Model.getINSTANCE().companyDao.getById(companyId));
         developer.setId(id);
 
         Model.getINSTANCE().developerDao.updateDeveloper(developer);

@@ -7,14 +7,14 @@ VALUES
 ('Marmalade','Ukraine, Lugansk');
 SELECT * FROM company;
 
-INSERT  INTO developer(name,surname, age, sex, company_id,salary)
-VALUES
-('Max', 'Bugalo', 46,'male',1,4400),
-('Huan', 'Pedro', 33,'male',1,2200),
-('Anna', 'Maria', 24,'famale',2,2200),
-('Ivan', 'Alien', 111,'unknown',3,4600);
-SELECT * FROM developer;
 
+INSERT  INTO developer(name,surname, age, sex,salary,company_id)
+VALUES
+('Max', 'Bugalo', 46,'male',4400,1),
+('Huan', 'Pedro', 33,'male',2200,2),
+('Anna', 'Maria', 24,'famale',2200,3),
+('Ivan', 'Alien', 111,'unknown',4600,1);
+SELECT * FROM developer;
 INSERT  INTO customer(name, address)
 VALUES
 ('Ministry of Defence', 'Ukraine, Kyiv'),
@@ -22,12 +22,12 @@ VALUES
 SELECT * FROM customer;
 
 
-INSERT  INTO project(name, description,company_id,customer_id,date)
+INSERT  INTO project(name, description,customer_id,company_id,cost,date)
 VALUES
-('Bad day', 'Software for the product which can do very big damage enemy unit in sea',1,1,'2020-02-11'),
-('Cookie', 'Cookie cookie soft',1,2,'1995-12-13'),
-('Cucumber', 'Software for the cucumber',2,1,'2022-07-17'),
-('Loaf', 'Software which control cooking machine',2,2,'2021-03-21');
+('Bad day', 'Software for the product which can do very big damage enemy unit in sea',1,1,12,'2020-02-11'),
+('Cookie', 'Cookie cookie soft',1,2,13,'1995-12-13'),
+('Cucumber', 'Software for the cucumber',2,1,14,'2022-07-17'),
+('Loaf', 'Software which control cooking machine',1,2,15,'2021-03-21');
 SELECT * FROM project;
 
 
@@ -39,7 +39,7 @@ VALUES
 ('Java', 'senior');
 SELECT * FROM skills;
 
-INSERT  INTO developer_skills(dev_id, skills_id)
+INSERT  INTO developer_skills(develop_id, skills_id)
 VALUES
 (1, 4),
 (1, 2),

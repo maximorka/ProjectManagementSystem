@@ -2,9 +2,9 @@ package com.model.command.skills;
 
 import com.model.Model;
 import com.model.command.Command;
-import com.model.feature.dataBaseService.project.entity.Project;
-import com.model.feature.dataBaseService.skills.entity.Skills;
-import com.model.feature.dataBaseService.skills.util.SkillsLevel;
+
+import com.model.hibernate.dataBaseService.skills.entity.Skills;
+import com.model.hibernate.dataBaseService.skills.util.SkillsLevel;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +21,13 @@ public class AddSkillsCommand implements Command {
             SkillsLevel level = SkillsLevel.valueOf(req.getParameter("level"));
             skills.setKategory(kategory);
             skills.setLevel(level);
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.sendRedirect("/skills");
             e.printStackTrace();
         }
 
 
-        try {
-            Model.getINSTANCE().skillsDao.create(skills);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        Model.getINSTANCE().skillsDao.create(skills);
 
         resp.sendRedirect("/skills");
     }

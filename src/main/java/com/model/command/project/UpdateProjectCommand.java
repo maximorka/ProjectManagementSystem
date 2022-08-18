@@ -2,8 +2,8 @@ package com.model.command.project;
 
 import com.model.Model;
 import com.model.command.Command;
-import com.model.feature.dataBaseService.company.entity.Company;
-import com.model.feature.dataBaseService.project.entity.Project;
+
+import com.model.hibernate.dataBaseService.project.entity.Project;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +24,8 @@ public class UpdateProjectCommand implements Command {
         Project project = new Project();
         project.setName(name);
         project.setDescription(description);
-        project.setCompany_id(companyId);
-        project.setCustomer_id(customerId);
+        project.setCompany(Model.getINSTANCE().companyDao.getById(companyId));
+        project.setCustomer(Model.getINSTANCE().customerDao.getById(customerId));
         project.setCost(Integer.parseInt(cost));
         project.setId(id);
 

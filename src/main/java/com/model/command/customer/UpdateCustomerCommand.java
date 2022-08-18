@@ -2,8 +2,7 @@ package com.model.command.customer;
 
 import com.model.Model;
 import com.model.command.Command;
-import com.model.feature.dataBaseService.company.entity.Company;
-import com.model.feature.dataBaseService.customer.entity.Customer;
+import com.model.hibernate.dataBaseService.customer.entity.Customer;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;

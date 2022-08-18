@@ -23,21 +23,18 @@ public class GetAllSkills implements Command {
         resp.setCharacterEncoding("UTF-8");
 
 
-
         resp.setContentType("text/html");
         Map<String, Object> skills = new HashMap<>();
 
-        try {
-            skills.put("skills", Model.getINSTANCE().getSkillsDao().getAllSkills());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
+        skills.put("skills", Model.getINSTANCE().getSkillsDao().getAllSkills());
+
 
         Context context = new Context(
-            req.getLocale(),
+                req.getLocale(),
                 skills
         );
-        templateEngine.process("skills", context,resp.getWriter());
+        templateEngine.process("skills", context, resp.getWriter());
         resp.getWriter().close();
     }
 }
